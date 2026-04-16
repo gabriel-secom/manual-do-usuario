@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Guia de Uso — Estúdio de Comunicação SRP4</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --verde: #1B4D2E;
+  --verde2: #2D7A47;
+  --verde3: #3B9458;
+  --verde-pale: #EAF4EE;
+  --verde-border: #A8D5B5;
+  --gold: #C8923A;
+  --gold-pale: #FDF6EC;
+  --text: #1a1a1a;
+  --text2: #4a5a4e;
+  --text3: #8a9e8e;
+  --bg: #FAFCFB;
+  --bg2: #F3F8F4;
+  --border: rgba(27,77,46,0.12);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* ── CAPA ───────────────────────────────────────────────────── */
+.capa {
+  min-height: 100vh;
+  background: var(--verde);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.capa::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(59,148,88,0.3) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 60% at 10% 80%, rgba(200,146,58,0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.capa-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.8);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 40px;
+  margin-bottom: 32px;
+  animation: fadeDown 0.6s ease both;
+}
+
+.capa h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  color: #fff;
+  line-height: 1.15;
+  max-width: 700px;
+  margin-bottom: 16px;
+  animation: fadeDown 0.7s ease 0.1s both;
+}
+
+.capa h1 em {
+  font-style: italic;
+  color: #a8d5b5;
+}
+
+.capa-sub {
+  font-size: 17px;
+  color: rgba(255,255,255,0.65);
+  max-width: 500px;
+  margin-bottom: 48px;
+  animation: fadeDown 0.7s ease 0.2s both;
+}
+
+.capa-stats {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: fadeDown 0.7s ease 0.3s both;
+}
+
+.capa-stat { text-align: center; }
+.capa-stat-n {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.8rem;
+  color: #fff;
+  line-height: 1;
+}
+.capa-stat-l {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 4px;
+}
+
+.capa-scroll {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255,255,255,0.4);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  animation: fadeDown 1s ease 0.6s both;
+}
+.scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+
+/* ── ÍNDICE ──────────────────────────────────────────────────── */
+.indice {
+  background: var(--verde-pale);
+  border-bottom: 1px solid var(--verde-border);
+  padding: 32px 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.indice-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.indice-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--verde);
+  margin-right: 4px;
+  white-space: nowrap;
+}
+
+.indice a {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--verde2);
+  text-decoration: none;
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--verde-border);
+  background: white;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.indice a:hover {
+  background: var(--verde);
+  color: white;
+  border-color: var(--verde);
+}
+
+/* ── SEÇÕES ──────────────────────────────────────────────────── */
+.secao {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 72px 24px;
+  border-bottom: 1px solid var(--border);
+}
+.secao:last-child { border-bottom: none; }
+
+.secao-num {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--verde3);
+  margin-bottom: 8px;
+}
+
+.secao h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  color: var(--verde);
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.secao-intro {
+  font-size: 17px;
+  color: var(--text2);
+  max-width: 640px;
+  margin-bottom: 40px;
+  line-height: 1.7;
+}
+
+/* ── CARDS FUNCIONAIS ────────────────────────────────────────── */
+.func-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.func-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.func-card:hover {
+  box-shadow: 0 8px 32px rgba(27,77,46,0.1);
+  transform: translateY(-2px);
+}
+
+.func-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--verde-pale);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.func-card h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--verde);
+  margin-bottom: 6px;
+}
+
+.func-card p {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.55;
+}
+
+/* ── PASSOS ──────────────────────────────────────────────────── */
+.passos { display: flex; flex-direction: column; gap: 0; }
+
+.passo {
+  display: flex;
+  gap: 20px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border);
+}
+.passo:last-child { border-bottom: none; }
+
+.passo-num {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--verde);
+  color: white;
+  font-family: 'DM Serif Display', serif;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.passo-body h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.passo-body p {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.65;
+}
+
+.passo-body .destaque {
+  display: inline-block;
+  background: var(--verde-pale);
+  border: 1px solid var(--verde-border);
+  color: var(--verde);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 4px;
+  margin-top: 8px;
+  margin-right: 6px;
+}
+
+/* ── DICA ────────────────────────────────────────────────────── */
+.dica {
+  background: var(--verde-pale);
+  border-left: 4px solid var(--verde3);
+  border-radius: 0 10px 10px 0;
+  padding: 16px 20px;
+  margin: 20px 0;
+}
+.dica-head {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--verde3);
+  margin-bottom: 6px;
+}
+.dica p {
+  font-size: 14px;
+  color: var(--verde);
+  line-height: 1.6;
+}
+
+.alerta {
+  background: var(--gold-pale);
+  border-left: 4px solid var(--gold);
+  border-radius: 0 10px 10px 0;
+  padding: 16px 20px;
+  margin: 20px 0;
+}
+.alerta-head {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+.alerta p {
+  font-size: 14px;
+  color: #5a3a10;
+  line-height: 1.6;
+}
+
+/* ── TABELA DE LINHAS ────────────────────────────────────────── */
+.tabela-linhas {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  margin: 20px 0;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.tabela-linhas th {
+  background: var(--verde);
+  color: white;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 12px 16px;
+  text-align: left;
+}
+.tabela-linhas td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text2);
+  vertical-align: top;
+}
+.tabela-linhas tr:last-child td { border-bottom: none; }
+.tabela-linhas tr:nth-child(even) td { background: var(--bg2); }
+.tabela-linhas td:first-child { font-weight: 600; color: var(--verde); }
+
+/* ── MOCKUP MOBILE ───────────────────────────────────────────── */
+.mockup-wrap {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 32px;
+  align-items: start;
+  margin: 32px 0;
+}
+@media(max-width: 600px) {
+  .mockup-wrap { grid-template-columns: 1fr; }
+  .mockup-phone { display: none; }
+}
+
+.mockup-phone {
+  background: white;
+  border: 2px solid var(--border);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(27,77,46,0.15);
+  position: sticky;
+  top: 80px;
+}
+
+.phone-bar {
+  background: var(--verde);
+  padding: 12px 14px;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.phone-form {
+  padding: 12px;
+}
+
+.phone-label {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text3);
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+  display: block;
+}
+.phone-select {
+  width: 100%;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 7px 10px;
+  font-size: 10px;
+  color: var(--text2);
+  margin-bottom: 8px;
+  appearance: none;
+}
+.phone-textarea {
+  width: 100%;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 7px 10px;
+  font-size: 10px;
+  color: var(--text2);
+  margin-bottom: 8px;
+  min-height: 50px;
+  resize: none;
+  font-family: 'DM Sans', sans-serif;
+  line-height: 1.4;
+}
+.phone-btn {
+  width: 100%;
+  background: var(--verde);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 9px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: default;
+}
+.phone-out {
+  background: var(--verde-pale);
+  border: 1px solid var(--verde-border);
+  border-radius: 7px;
+  padding: 10px;
+  font-size: 9px;
+  color: var(--verde);
+  line-height: 1.6;
+  margin-top: 8px;
+}
+.phone-tab {
+  display: flex;
+  border-top: 1px solid var(--border);
+  margin-top: 8px;
+}
+.phone-tab-item {
+  flex: 1;
+  padding: 8px 4px;
+  text-align: center;
+  font-size: 8px;
+  color: var(--text3);
+}
+.phone-tab-item.active { color: var(--verde); font-weight: 700; }
+
+/* ── EXEMPLOS DE BRIEFING ────────────────────────────────────── */
+.exemplos { display: flex; flex-direction: column; gap: 16px; margin: 24px 0; }
+
+.ex-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.ex-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+}
+
+.ex-badge {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+.ex-badge.ruim { background: #fef2f2; color: #b91c1c; }
+.ex-badge.bom { background: var(--verde-pale); color: var(--verde); }
+
+.ex-head span { font-size: 13px; font-weight: 600; color: var(--text); }
+
+.ex-body {
+  padding: 14px 16px;
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.ex-body em {
+  font-style: normal;
+  color: var(--text3);
+  font-size: 12px;
+  display: block;
+  margin-top: 6px;
+}
+
+/* ── ENGAJAMENTO ─────────────────────────────────────────────── */
+.eng-campos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.eng-campo {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+}
+.eng-campo-nome {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text3);
+  margin-bottom: 6px;
+}
+.eng-campo-desc {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.5;
+}
+
+/* ── APRENDIZADO ─────────────────────────────────────────────── */
+.timeline {
+  position: relative;
+  padding-left: 28px;
+  margin: 24px 0;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--verde-border);
+}
+
+.tl-item {
+  position: relative;
+  margin-bottom: 24px;
+}
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: -24px;
+  top: 6px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--verde);
+  border: 2px solid white;
+  box-shadow: 0 0 0 2px var(--verde-border);
+}
+.tl-item h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--verde);
+  margin-bottom: 4px;
+}
+.tl-item p {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.6;
+}
+
+/* ── PERGUNTAS FREQ ──────────────────────────────────────────── */
+.faq { margin: 24px 0; }
+
+.faq-item {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  background: white;
+}
+
+.faq-q {
+  padding: 16px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+}
+.faq-q:hover { background: var(--bg2); }
+
+.faq-arrow {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: var(--verde3);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+
+.faq-a {
+  padding: 0 20px;
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.7;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s;
+}
+
+.faq-item.open .faq-a {
+  max-height: 400px;
+  padding: 0 20px 16px;
+}
+.faq-item.open .faq-arrow { transform: rotate(180deg); }
+
+/* ── RODAPÉ ──────────────────────────────────────────────────── */
+.rodape {
+  background: var(--verde);
+  color: rgba(255,255,255,0.7);
+  text-align: center;
+  padding: 48px 24px;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.rodape strong { color: white; }
+
+/* ── ANIMAÇÕES ───────────────────────────────────────────────── */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.vis {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── RESPONSIVO ──────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .secao { padding: 48px 20px; }
+  .capa-stats { gap: 24px; }
+  .func-grid { grid-template-columns: 1fr; }
+  .indice-inner { gap: 8px; }
+  .tabela-linhas { font-size: 12px; }
+  .tabela-linhas th, .tabela-linhas td { padding: 10px 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- CAPA                                                       -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section class="capa">
+  <div class="capa-badge">Guia oficial de uso · v5.5</div>
+  <h1>Estúdio de <em>Comunicação</em><br>SRP4</h1>
+  <p class="capa-sub">Tudo que você precisa saber para gerar conteúdo de qualidade para a Prefeitura de Santa Rita do Passa Quatro</p>
+  <div class="capa-stats">
+    <div class="capa-stat">
+      <div class="capa-stat-n">3</div>
+      <div class="capa-stat-l">Formatos</div>
+    </div>
+    <div class="capa-stat">
+      <div class="capa-stat-n">16</div>
+      <div class="capa-stat-l">Departamentos</div>
+    </div>
+    <div class="capa-stat">
+      <div class="capa-stat-n">4</div>
+      <div class="capa-stat-l">Linhas editoriais</div>
+    </div>
+    <div class="capa-stat">
+      <div class="capa-stat-n">IA</div>
+      <div class="capa-stat-l">Aprende com você</div>
+    </div>
+  </div>
+  <div class="capa-scroll">
+    <div class="scroll-line"></div>
+    Role para começar
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- ÍNDICE FLUTUANTE                                           -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<nav class="indice">
+  <div class="indice-inner">
+    <span class="indice-label">Ir para:</span>
+    <a href="#acesso">Acesso</a>
+    <a href="#visao-geral">Visão geral</a>
+    <a href="#produzir">Produzir</a>
+    <a href="#briefing">Briefing</a>
+    <a href="#historico">Histórico</a>
+    <a href="#chat">Chat</a>
+    <a href="#agenda">Agenda</a>
+    <a href="#aprendizado">Aprendizado</a>
+    <a href="#boas-praticas">Boas práticas</a>
+    <a href="#faq">Dúvidas</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- 1. ACESSO                                                  -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section class="secao reveal" id="acesso">
+  <div class="secao-num">01 — Primeiros passos</div>
+  <h2>Como entrar no sistema</h2>
+  <p class="secao-intro">O Estúdio funciona no navegador do seu celular ou computador. O acesso é por convite — um administrador precisa aprovar seu cadastro antes que você consiga usar.</p>
+
+  <div class="passos">
+    <div class="passo">
+      <div class="passo-num">1</div>
+      <div class="passo-body">
+        <h3>Solicite o cadastro</h3>
+        <p>Abra o link do Estúdio no navegador. Na tela de login, toque em <strong>"Solicitar cadastro"</strong>. Preencha seu nome completo, e-mail e uma senha com pelo menos 6 caracteres.</p>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">2</div>
+      <div class="passo-body">
+        <h3>Aguarde a aprovação</h3>
+        <p>Após enviar, você verá uma tela de "Aguardando aprovação". O administrador (Assessoria de Comunicação) irá liberar seu acesso. Esse passo pode levar algumas horas.</p>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">3</div>
+      <div class="passo-body">
+        <h3>Faça login e comece a usar</h3>
+        <p>Assim que o acesso for aprovado, entre com seu e-mail e senha. O sistema salva sua sessão — você não precisa entrar toda vez que abrir o app.</p>
+        <div class="destaque">💡 Dica</div>
+        <span class="destaque" style="background:#eff6ff;border-color:#bfdbfe;color:#1e40af">Para instalar como app no celular: no iPhone, toque em Compartilhar → Adicionar à Tela de Início. No Android, toque nos 3 pontos do Chrome → Adicionar à tela inicial.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- 2. VISÃO GERAL                                             -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section class="secao reveal" id="visao-geral">
+  <div class="secao-num">02 — Conhecendo o app</div>
+  <h2>O que o Estúdio faz</h2>
+  <p class="secao-intro">O Estúdio é um assistente de comunicação com inteligência artificial, treinado especificamente para a Prefeitura de Santa Rita do Passa Quatro. Ele gera textos, ajuda a estruturar pautas e aprende com o seu uso ao longo do tempo.</p>
+
+  <div class="func-grid">
+    <div class="func-card">
+      <div class="func-icon">✏️</div>
+      <h3>Produzir</h3>
+      <p>Gera textos prontos para redes sociais e publicações oficiais, a partir de um briefing que você escreve.</p>
+    </div>
+    <div class="func-card">
+      <div class="func-icon">📋</div>
+      <h3>Histórico</h3>
+      <p>Armazena tudo que foi gerado. Você pode copiar, registrar dados de engajamento e acompanhar a performance.</p>
+    </div>
+    <div class="func-card">
+      <div class="func-icon">📅</div>
+      <h3>Agenda</h3>
+      <p>Calendário editorial compartilhado da prefeitura. Todos veem os mesmos eventos e compromissos em tempo real.</p>
+    </div>
+    <div class="func-card">
+      <div class="func-icon">💬</div>
+      <h3>Chat</h3>
+      <p>Assistente livre para tirar dúvidas de redação, estratégia de comunicação e qualquer outra questão do dia a dia.</p>
+    </div>
+    <div class="func-card">
+      <div class="func-icon">👤</div>
+      <h3>Perfil</h3>
+      <p>Mostra seu histórico de produção e o perfil de aprendizado que a IA criou sobre o seu estilo de trabalho.</p>
+    </div>
+    <div class="func-card">
+      <div class="func-icon">🔔</div>
+      <h3>Notificações</h3>
+      <p>Alerta quando um post publicado está há mais de 3 dias sem dados de engajamento registrados.</p>
+    </div>
+  </div>
+
+  <div class="dica">
+    <div class="dica-head">✦ O que o Estúdio NÃO faz</div>
+    <p>O Estúdio não publica nas redes sociais automaticamente. Ele produz o texto — você ainda precisa copiar e publicar manualmente no Instagram, Facebook ou WhatsApp.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- 3. PRODUZIR                                                -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section class="secao reveal" id="produzir">
+  <div class="secao-num">03 — Funcionalidade principal</div>
+  <h2>Como usar o <em>Produzir</em></h2>
+  <p class="secao-intro">Produzir é a função mais importante do Estúdio. Em poucos campos, você configura o tipo de conteúdo e descreve o que aconteceu — a IA faz o resto.</p>
+
+  <div class="mockup-wrap">
+    <div class="mockup-phone">
+      <div class="phone-bar">✏️ Produzir</div>
+      <div class="phone-form">
+        <label class="phone-label">Formato</label>
+        <select class="phone-select">
+          <option>Post estático</option>
+        </select>
+        <label class="phone-label">Departamento · Linha</label>
+        <select class="phone-select">
+          <option>Saúde · Prefeitura</option>
+        </select>
+        <label class="phone-label">Tom</label>
+        <select class="phone-select">
+          <option>Informativo</option>
+        </select>
+        <label class="phone-label">Briefing</label>
+        <textarea class="phone-textarea">Vacinação contra gripe começa dia 20/04. Postos de saúde das 8h às 16h. Prioridade: idosos acima de 60 anos e gestantes.</textarea>
+        <button class="phone-btn">Gerar conteúdo →</button>
+        <div class="phone-out">
+          🩺 A campanha de vacinação contra a gripe começa na próxima semana em Santa Rita do Passa Quatro! A partir do dia 20/04, todos os postos de saúde estarão atendendo das 8h às 16h. A prioridade desta primeira etapa é para idosos acima de 60 anos e gestantes. Cuide da sua saúde! #SantaRita #Saúde #Vacinação
+        </div>
+        <div class="phone-tab">
+          <div class="phone-tab-item">🏠</div>
+          <div class="phone-tab-item active">✏️</div>
+          <div class="phone-tab-item">📅</div>
+          <div class="phone-tab-item">💬</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="passos">
+        <div class="passo">
+          <div class="passo-num">1</div>
+          <div class="passo-body">
+            <h3>Escolha o formato</h3>
+            <p><strong>Post estático</strong> — imagem única. Legenda com gancho, dado principal e chamada para ação.<br><br>
+            <strong>Carrossel</strong> — sequência de slides. A IA gera a legenda e a estrutura de cada slide com título e texto.<br><br>
+            <strong>Comunicado</strong> — texto oficial formal, sem hashtags. Ideal para atas, portarias, avisos institucionais.</p>
+          </div>
+        </div>
+        <div class="passo">
+          <div class="passo-num">2</div>
+          <div class="passo-body">
+            <h3>Selecione departamento e linha editorial</h3>
+            <p>O <strong>departamento</strong> indica qual secretaria ou área é responsável pela ação. A <strong>linha editorial</strong> define quem "fala" no conteúdo e para quem:</p>
+          </div>
+        </div>
+        <div class="passo">
+          <div class="passo-num">3</div>
+          <div class="passo-body">
+            <h3>Defina o tom</h3>
+            <p><strong>Institucional</strong> — formal, sóbrio.<br>
+            <strong>Informativo</strong> — direto, objetivo, sem firulas.<br>
+            <strong>Engajamento</strong> — mais leve, convida o cidadão a interagir ou comentar.</p>
+          </div>
+        </div>
+        <div class="passo">
+          <div class="passo-num">4</div>
+          <div class="passo-body">
+            <h3>Escreva o briefing</h3>
+            <p>Este é o campo mais importante. Quanto mais informação você fornecer, melhor o resultado. Veja a próxima seção para aprender a escrever um bom briefing.</p>
+          </div>
+        </div>
+        <div class="passo">
+          <div class="passo-num">5</div>
+          <div class="passo-body">
+            <h3>Revise, copie ou peça nova versão</h3>
+            <p>Após gerar, você pode <strong>Copiar</strong> o texto, pedir uma <strong>Nova versão</strong> (mantendo o mesmo briefing) ou <strong>Salvar</strong> no histórico. Sempre revise antes de publicar.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="font-size:17px;font-weight:700;color:var(--verde);margin:32px 0 12px">Linhas editoriais — qual usar em cada situação</h3>
+  <table class="tabela-linhas">
+    <thead>
+      <tr>
+        <th>Linha</th>
+        <th>Voz</th>
+        <th>Use quando...</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Prefeitura</td>
+        <td>Comunicação institucional oficial da Prefeitura</td>
+        <td>Comunicados, inaugurações, ações de governo, programas municipais</td>
+      </tr>
+      <tr>
+        <td>Prefeito Marcelo</td>
+        <td>Voz direta, próxima e humanizada do Prefeito</td>
+        <td>Mensagens pessoais do prefeito, agradecimentos, posicionamentos políticos</td>
+      </tr>
+      <tr>
+        <td>Turismo — visitante</td>
+        <td>Convite para quem está fora de SRP4</td>
+        <td>Campanhas para atrair turistas, divulgar atrativos, eventos culturais</td>
+      </tr>
+      <tr>
+        <td>Turismo — morador</td>
+        <td>Despertar o orgulho de quem vive na cidade</td>
+        <td>Posts para valorizar a cidade junto à população local, incentivar o turismo interno</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="dica">
+    <div class="dica-head">✦ Campos opcionais que fazem diferença</div>
+    <p><strong>Referência de estilo:</strong> cole um post antigo que você gostou. A IA vai tentar replicar o estilo sem copiar o conteúdo.<br><br>
+    <strong>Instrução extra:</strong> use para personalizar ("mencionar Vice-Prefeita Ariana", "incluir endereço do local", "usar linguagem mais simples").<br><br>
+    <strong>Hashtags:</strong> coloque as que você quer que apareçam (máx. 3). A IA as inclui automaticamente ao final.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- 4. BRIEFING                                                -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section class="secao reveal" id="briefing">
+  <div class="secao-num">04 — A habilidade mais importante</div>
+  <h2>Como escrever um bom briefing</h2>
+  <p class="secao-intro">O briefing é a matéria-prima da IA. Um briefing fraco gera um texto fraco. Um briefing completo gera um texto que você copia sem quase precisar editar.</p>
+
+  <h3 style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:12px">As 5 perguntas de ouro</h3>
+  <div class="eng-campos">
+    <div class="eng-campo">
+      <div class="eng-campo-nome">O quê?</div>
+      <div class="eng-campo-desc">O que aconteceu ou vai acontecer? Qual a ação?</div>
+    </div>
+    <div class="eng-campo">
+      <div class="eng-campo-nome">Onde?</div>
+      <div class="eng-campo-desc">Local, bairro, endereço ou abrangência.</div>
+    </div>
+    <div class="eng-campo">
+      <div class="eng-campo-nome">Quando?</div>
+      <div class="eng-campo-desc">Data, horário, período ou prazo.</div>
+    </div>
+    <div class="eng-campo">
+      <div class="eng-campo-nome">Quem?</div>
+      <div class="eng-campo-desc">Público beneficiado, responsáveis, parceiros.</div>
+    </div>
+    <div class="eng-campo">
+      <div class="eng-campo-nome">Quanto?</div>
+      <div class="eng-campo-desc">Número de beneficiados, investimento, metas.</div>
+    </div>
+  </div>
+
+  <h3 style="font-size:16px;font-weight:700;color:var(--text);margin:28px 0 12px">Veja a diferença na prática</h3>
+  <div class="exemplos">
+    <div class="ex-card">
+      <div class="ex-head">
+        <span class="ex-badge ruim">❌ Briefing fraco</span>
+        <span>Gera resultado genérico e impreciso</span>
+      </div>
+      <div class="ex-body">
+        "Evento de saúde amanhã."
+        <em>Faltam data, local, horário, público-alvo e objetivo. A IA vai inventar dados ou produzir um texto vago.</em>
+      </div>
+    </div>
+    <div class="ex-card">
+      <div class="ex-head">
+        <span class="ex-badge bom">✅ Briefing completo</span>
+        <span>Gera resultado publicável direto</span>
+      </div>
+      <div class="ex-body">
+        "Campanha de vacinação contra a gripe começa dia 20 de abril. Todos os postos de saúde do município, das 8h às 16h. Primeira etapa prioriza idosos acima de 60 anos e gestantes. Meta de vacinar 3.500 pessoas nas primeiras duas semanas."
+        <em>Com esses dados, a IA produz um texto completo, preciso e que não precisa de correção.</em>
+      </div>
+    </div>
+    <div class="ex-card">
+      <div class="ex-head">
+        <span class="ex-badge ruim">❌ Briefing fraco</span>
+        <span>Para carrossel sobre obra</span>
+      </div>
+      <div class="ex-body">
+        "Estamos reformando a praça."
+        <em>Sem localização, prazo, investimento ou o que vai mudar. O carrossel ficará vazio de conteúdo.</em>
+      </div>
+    </div>
+    <div class="ex-card">
+      <div class="ex-head">
+        <span class="ex-badge bom">✅ Briefing completo</span>
+        <span>Para carrossel sobre obra</span>
+      </div>
+      <div class="ex-body">
+        "Reforma da Praça da Matriz em andamento. Investimento de R$ 280 mil do orçamento municipal. Previsão de entrega: julho/2025. Melhorias: novo piso, iluminação LED, bancos e academia ao ar livre. Vai beneficiar toda a população do centro histórico."
+        <em>A IA vai estruturar um carrossel com slide de abertura, detalhes por tópico e encerramento com chamada.</em>
+      </div>
+    </div>
+  </div>
+
+  <div class="alerta">
+    <div class="alerta-head">⚠️ Importante</div>
+    <p>A IA <strong>nunca inventa dados que não estão no briefing</strong>. Se você não informar o investimento, ela não coloca um número fictício. Por isso, quanto mais completo o briefing, mais rico o texto final.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- 5. HISTÓRICO E ENGAJAMENTO                                 -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section class="secao reveal" id="historico">
+  <div class="secao-num">05 — Gestão de conteúdo</div>
+  <h2>Histórico e engajamento</h2>
+  <p class="secao-intro">Tudo que você salva fica no Histórico. Além de recuperar textos, você pode registrar os resultados de cada post publicado — e isso alimenta o sistema de aprendizado da IA.</p>
+
+  <div class="passos">
+    <div class="passo">
+      <div class="passo-num">1</div>
+      <div class="passo-body">
+        <h3>Salve sempre após gerar</h3>
+        <p>Após gerar um texto satisfatório, toque em <strong>Salvar</strong>. O conteúdo vai para o Histórico com o formato, departamento e linha editorial registrados.</p>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">2</div>
+      <div class="passo-body">
+        <h3>Marque o status do post</h3>
+        <p>No Histórico, cada post tem um campo de status. Mantenha atualizado para ter uma visão real da produção:</p>
+        <div class="destaque">Rascunho</div>
+        <div class="destaque">Aguardando aprovação</div>
+        <div class="destaque">Publicado</div>
+        <div class="destaque">Descartado</div>
+        <div class="destaque">Arquivado</div>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">3</div>
+      <div class="passo-body">
+        <h3>Registre os dados de engajamento</h3>
+        <p>Depois que o post for ao ar, volte ao Histórico e registre os números. Isso é fundamental para o sistema de aprendizado funcionar.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="font-size:16px;font-weight:700;color:var(--text);margin:28px 0 12px">Campos de engajamento disponíveis</h3>
+  <div class="eng-campos">
+    <div class="eng-campo">
+      <div class="eng-campo-nome">Alcance</div>
+      <div class="eng-campo-desc">Quantas pessoas foram impactadas pelo post (número de contas únicas).</div>
+    </div>
+    <div class="eng-campo">
+      <div class="eng-campo-nome">Curtidas</div>
+      <div class="eng-campo-desc">Total de reações (curtidas, corações, etc.).</div>
+    </div>
+    <div class="eng-campo">
+      <div class="eng-campo-nome">Comentários</div>
+      <div class="eng-campo-desc">Número de comentários recebidos.</div>
+    </div>
+    <div class="eng-campo">
+      <div class="eng-campo-nome">Sentimento</div>
+      <div class="eng-campo-desc">Avaliação geral da recepção: positivo, neutro ou negativo.</div>
+    </div>
+  </div>
+
+  <div class="dica">
+    <div class="dica-head">✦ O sino de notificação</div>
+    <p>Se um post foi marcado como "Publicado" mas continua sem dados de engajamento após 3 dias, o sistema acende um badge de alerta no ícone de sino. É um lembrete automático para você não esquecer de registrar os resultados.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- 6. CHAT                                                    -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section class="secao reveal" id="chat">
+  <div class="secao-num">06 — Assistente livre</div>
+  <h2>O que você pode pedir no Chat</h2>
+  <p class="secao-intro">O Chat é um assistente de comunicação disponível a qualquer hora. Diferente do Produzir — que segue uma estrutura —, no Chat você conversa livremente e pede qualquer tipo de ajuda.</p>
+
+  <div class="func-grid">
+    <div class="func-card">
+      <div class="func-icon">📝</div>
+      <h3>Redação e revisão</h3>
+      <p>"Pode melhorar esse texto que eu escrevi?" ou "Reescreve esse comunicado de forma mais direta."</p>
+    </div>
+    <div class="func-card">
+      <div class="func-icon">🎯</div>
+      <h3>Estratégia de pauta</h3>
+      <p>"Qual a melhor forma de comunicar uma obra que está atrasada?" ou "Como anunciar um reajuste de tarifa?"</p>
+    </div>
+    <div class="func-card">
+      <div class="func-icon">💡</div>
+      <h3>Ideias e variações</h3>
+      <p>"Me dê 5 ideias de posts para o Dia do Meio Ambiente com foco em SRP4."</p>
+    </div>
+    <div class="func-card">
+      <div class="func-icon">📐</div>
+      <h3>Formatação e estrutura</h3>
+      <p>"Como estruturo um carrossel sobre os 4 projetos de infraestrutura do semestre?"</p>
+    </div>
+    <div class="func-card">
+      <div class="func-icon">🔤</div>
+      <h3>Tom e linguagem</h3>
+      <p>"Esse texto tá muito formal? Deixa mais próximo para o cidadão comum."</p>
+    </div>
+    <div class="func-card">
+      <div class="func-icon">📊</div>
+      <h3>Análise de contexto</h3>
+      <p>"Tá tendo muita crítica nas redes sobre coleta de lixo. O que a comunicação pode fazer?"</p>
+    </div>
+  </div>
+
+  <div class="alerta">
+    <div class="alerta-head">⚠️ Limite de mensagens</div>
+    <p>Cada sessão de Chat suporta até <strong>20 mensagens</strong>. Quando acabar, toque em <strong>"Nova conversa"</strong> para começar uma sessão limpa. O histórico das sessões anteriores fica salvo automaticamente.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- 7. AGENDA                                                  -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section class="secao reveal" id="agenda">
+  <div class="secao-num">07 — Calendário compartilhado</div>
+  <h2>Usando a Agenda</h2>
+  <p class="secao-intro">A aba Agenda exibe o calendário editorial da Prefeitura em tempo real. É um Google Calendar compartilhado — todos os usuários do Estúdio veem os mesmos eventos.</p>
+
+  <div class="passos">
+    <div class="passo">
+      <div class="passo-num">1</div>
+      <div class="passo-body">
+        <h3>Consulte antes de produzir</h3>
+        <p>Antes de gerar um conteúdo, verifique na Agenda se há algo planejado para o mesmo período. Isso evita conflitos de comunicação e garante coerência editorial.</p>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">2</div>
+      <div class="passo-body">
+        <h3>Quem adiciona eventos?</h3>
+        <p>O calendário é gerenciado pela Assessoria de Comunicação diretamente no Google Calendar. Se você precisar incluir um evento, entre em contato com o admin.</p>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">3</div>
+      <div class="passo-body">
+        <h3>Use como pauta semanal</h3>
+        <p>Abra a Agenda toda segunda-feira para planejar a semana. Identifique os eventos que vão gerar conteúdo e já deixe os briefings preparados.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- 8. APRENDIZADO                                             -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section class="secao reveal" id="aprendizado">
+  <div class="secao-num">08 — Inteligência adaptativa</div>
+  <h2>Como o sistema <em>aprende</em> com você</h2>
+  <p class="secao-intro">O Estúdio não é um gerador de texto genérico. Com o tempo, ele analisa seus dados de engajamento e adapta o estilo dos conteúdos ao que funciona melhor no perfil da cidade.</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <h4>Você usa e registra engajamento</h4>
+      <p>A cada post salvo e com dados de engajamento preenchidos, o sistema acumula informação sobre o que gerou mais alcance, curtidas e sentimento positivo.</p>
+    </div>
+    <div class="tl-item">
+      <h4>A cada 5 registros, o perfil é atualizado</h4>
+      <p>Após cada 5 novos registros de engajamento, a IA gera automaticamente um "perfil de produção individual" — um texto descrevendo os padrões do seu conteúdo mais eficaz.</p>
+    </div>
+    <div class="tl-item">
+      <h4>O perfil é injetado silenciosamente nos próximos textos</h4>
+      <p>Na sua próxima geração, o perfil já está incluído nas instruções da IA — sem você precisar fazer nada. O resultado é um texto que, gradualmente, fica mais alinhado com o que seu público responde melhor.</p>
+    </div>
+    <div class="tl-item">
+      <h4>Você vê o perfil no seu Perfil de Usuário</h4>
+      <p>Acesse a aba Perfil (ícone de usuário no canto superior direito) e procure a seção <strong>"Perfil de aprendizado"</strong>. Lá aparece um resumo em texto do que a IA identificou sobre seu estilo de produção.</p>
+    </div>
+  </div>
+
+  <div class="dica">
+    <div class="dica-head">✦ Por que isso importa</div>
+    <p>O sistema de aprendizado é o que diferencia o Estúdio de qualquer outro gerador de texto. Quanto mais você usar e registrar os resultados, mais precisa e personalizada ficará a IA — especificamente para Santa Rita do Passa Quatro.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- 9. BOAS PRÁTICAS                                           -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section class="secao reveal" id="boas-praticas">
+  <div class="secao-num">09 — Para extrair o máximo</div>
+  <h2>Boas práticas de uso</h2>
+  <p class="secao-intro">Seguir estas práticas transforma o Estúdio de uma ferramenta simples em um ativo estratégico de comunicação para o município.</p>
+
+  <div class="func-grid">
+    <div class="func-card">
+      <div class="func-icon">🏃</div>
+      <h3>Nunca copie sem revisar</h3>
+      <p>A IA pode errar. Revise sempre datas, nomes de lugares, valores e qualquer dado factual antes de publicar. Você é a última linha de curadoria.</p>
+    </div>
+    <div class="func-card">
+      <div class="func-icon">🔁</div>
+      <h3>Peça Nova Versão sem medo</h3>
+      <p>Se o resultado não ficou bom, clique em "Nova versão". A IA gera uma abordagem diferente com o mesmo briefing. Tente até 3 versões antes de editar manualmente.</p>
+    </div>
+    <div class="func-card">
+      <div class="func-icon">📐</div>
+      <h3>Combine tom e formato certo</h3>
+      <p>Para uma inauguração: Post estático + Linha Prefeitura + Tom Institucional. Para um evento cultural: Post estático + Linha Turismo morador + Tom Engajamento.</p>
+    </div>
+    <div class="func-card">
+      <div class="func-icon">⏱️</div>
+      <h3>Registre engajamento em 48h</h3>
+      <p>Dados de engajamento registrados logo após a publicação são mais precisos e alimentam melhor o sistema de aprendizado.</p>
+    </div>
+    <div class="func-card">
+      <div class="func-icon">📁</div>
+      <h3>Salve tudo, descarte depois</h3>
+      <p>Salve mesmo os textos que não foram publicados. Você pode usar como base para textos futuros ou como referência de estilo.</p>
+    </div>
+    <div class="func-card">
+      <div class="func-icon">🗓️</div>
+      <h3>Pauta semanal toda segunda</h3>
+      <p>Cheque a Agenda, identifique os eventos da semana e prepare os briefings com antecedência. Produzir sob pressão gera briefings fracos.</p>
+    </div>
+    <div class="func-card">
+      <div class="func-icon">🎨</div>
+      <h3>Use a referência de estilo</h3>
+      <p>Achou um post antigo que performou muito bem? Cole no campo "Referência de estilo" e peça para a IA seguir aquela abordagem.</p>
+    </div>
+    <div class="func-card">
+      <div class="func-icon">💬</div>
+      <h3>Tire dúvidas no Chat antes de criar</h3>
+      <p>Se a pauta for delicada ou complexa, use o Chat para discutir a abordagem antes de gerar o conteúdo final. A IA pode apontar riscos ou sugerir ângulos melhores.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- 10. FAQ                                                    -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section class="secao reveal" id="faq">
+  <div class="secao-num">10 — Dúvidas frequentes</div>
+  <h2>Perguntas e respostas</h2>
+  <p class="secao-intro">Respostas rápidas para as dúvidas mais comuns de quem está começando.</p>
+
+  <div class="faq">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Posso usar o Estúdio no celular?
+        <svg class="faq-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="faq-a">Sim. O Estúdio foi projetado como PWA (Progressive Web App) e funciona muito bem em celulares. Você pode inclusive instalá-lo como se fosse um app nativo: no iPhone, use o menu Compartilhar → Adicionar à Tela de Início; no Android, toque nos 3 pontos do Chrome → Instalar aplicativo.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        O texto gerado vai direto para as redes sociais?
+        <svg class="faq-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="faq-a">Não. O Estúdio produz o texto — a publicação ainda precisa ser feita manualmente por você no Instagram, Facebook ou WhatsApp. Isso é intencional: sempre haverá uma revisão humana antes de qualquer publicação.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Posso pedir uma nova versão do texto sem perder o briefing?
+        <svg class="faq-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="faq-a">Sim. O botão "Nova versão" reaproveita todos os campos que você já preencheu (formato, departamento, linha, tom, briefing) e gera uma abordagem diferente. Você não perde nada.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        O que acontece se eu não registrar o engajamento?
+        <svg class="faq-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="faq-a">O sistema de aprendizado não consegue melhorar sem dados de retorno. Além disso, após 3 dias sem registrar o engajamento de um post publicado, o app vai te notificar automaticamente com um badge no sino. Registrar os resultados é o que faz a IA ficar mais inteligente ao longo do tempo.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        O sistema lembra do que eu conversei no Chat na sessão anterior?
+        <svg class="faq-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="faq-a">Não. O Chat não tem memória entre sessões — cada nova conversa começa do zero. Dentro de uma sessão, o assistente se lembra de tudo que foi dito (até 20 mensagens). Por isso, se precisar de contexto específico, informe no início da conversa.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Para que serve a linha "Turismo — morador" se o cidadão já mora na cidade?
+        <svg class="faq-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="faq-a">O morador muitas vezes não conhece ou não valoriza os atrativos turísticos da própria cidade. A linha "Turismo — morador" foca em despertar esse orgulho e curiosidade, levando o cidadão a descobrir e frequentar os pontos turísticos locais — o que também movimenta o comércio e a economia do município.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Posso usar o Estúdio para redigir comunicados formais e internos?
+        <svg class="faq-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="faq-a">Sim. Selecione o formato "Comunicado / Publicação oficial" — ele gera um texto formal sem hashtags, ideal para portarias, avisos internos, comunicados à imprensa e publicações oficiais. Para documentos muito formais, use também o tom "Institucional".</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        A IA pode inventar dados que eu não informei no briefing?
+        <svg class="faq-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="faq-a">Não — ela tem instrução explícita para nunca inventar dados não presentes no briefing. Mas revise sempre: às vezes a IA pode interpretar algo de forma incorreta ou generalizar um dado. A revisão humana é obrigatória antes de qualquer publicação.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- RODAPÉ                                                     -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<footer class="rodape">
+  <strong>Estúdio de Comunicação — Prefeitura de Santa Rita do Passa Quatro (SP)</strong><br>
+  Gestão Marcelo Simão · Versão 5.5<br><br>
+  Dúvidas ou problemas técnicos? Fale com a Assessoria de Comunicação.<br>
+  <span style="font-size:12px;opacity:0.5;margin-top:12px;display:block">Este guia é um documento interno e destina-se exclusivamente à equipe municipal.</span>
+</footer>
+
+<script>
+// ── FAQ ACCORDION ─────────────────────────────────────────────
+function toggleFaq(el) {
+  const item = el.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// ── REVEAL ON SCROLL ──────────────────────────────────────────
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('vis');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
